@@ -35,7 +35,7 @@ public class SOPDataController {
     }
 
     @PostMapping("/addParameter")
-    public SOPData addParameterToSOPData(@RequestParam(name="sopDataId") UUID sopId , @RequestParam(name = "parameterId") UUID parameterId){
-        return service.addParameter(sopId,parameterId);
+    public SOPData addParameterToSOPData(@RequestParam(name = "sopDataId") UUID sopId, @RequestParam(name = "parameterId") UUID parameterId) {
+        return service.addParameter(sopId, parameterId);
     }
 }
