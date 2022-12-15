@@ -1,14 +1,14 @@
 package com.mycode.sopsdemo.service;
 
-import com.mycode.sopsdemo.entity.Parameter;
+import com.mycode.sopsdemo.entity.Condition;
 import com.mycode.sopsdemo.entity.SOP;
 import com.mycode.sopsdemo.entity.SOPData;
-import com.mycode.sopsdemo.repository.ParameterRepository;
-import com.mycode.sopsdemo.repository.SOPDataRepository;
 import com.mycode.sopsdemo.repository.SOPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,6 +30,9 @@ public class SOPService implements SOPServices<SOP>{
         Optional<SOP> result = sopRepo.findById(id);
         if(result.isEmpty())
             throw new RuntimeException("Parameter Not Found !!");
+        System.out.println("SOP Conditions: --------------------------");
+        System.out.println(result.get().getConditions());
+        System.out.println("-------------------------------------------------------------------");
         return result.get();
     }
 
@@ -56,5 +59,11 @@ public class SOPService implements SOPServices<SOP>{
 
         return sopRepo.save(sop);
     }
+
+    public List<Condition> getAllConditions(UUID id) {
+        SOP sop = findById(id);
+        return sop.getConditions();
+    }
+
 
 }

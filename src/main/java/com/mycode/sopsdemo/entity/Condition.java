@@ -1,9 +1,13 @@
 package com.mycode.sopsdemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,4 +29,23 @@ public class Condition {
     @Column(name = "task_name")
     private String taskName;
 
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "sop_condition",
+            inverseJoinColumns = {@JoinColumn(name = "sop_id")},
+            joinColumns = {@JoinColumn(name = "condition_id")}
+    )
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private List<SOP> sops;
+
+
+
+    public void addSOP(SOP sop) {
+        sops.add(sop);
+    }
 }
