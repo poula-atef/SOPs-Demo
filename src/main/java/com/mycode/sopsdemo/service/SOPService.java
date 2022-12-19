@@ -29,7 +29,7 @@ public class SOPService implements SOPServices<SOP>{
     public SOP findById(UUID id) {
         Optional<SOP> result = sopRepo.findById(id);
         if(result.isEmpty())
-            throw new RuntimeException("Parameter Not Found !!");
+            throw new RuntimeException("SOP Not Found !!");
         System.out.println("SOP Conditions: --------------------------");
         System.out.println(result.get().getConditions());
         System.out.println("-------------------------------------------------------------------");

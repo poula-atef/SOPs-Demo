@@ -38,8 +38,7 @@ public class Condition {
             inverseJoinColumns = {@JoinColumn(name = "sop_id")},
             joinColumns = {@JoinColumn(name = "condition_id")}
     )
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
+
     @JsonIgnore
     private List<SOP> sops;
 
